@@ -70,234 +70,40 @@ json:
    "restaurant_id":"1",
   }
 ```
+Response:
+```
+{
+    "message": "Table Added Successfully"
+}
+```
 
-
-method  `GET`
-
-end point: ``` api/v1/user/customer/{customer}```
-
-
-method  `DELETE`
-
-end point: ``` api/v1/user/customer/{customer}```
-
-### Provider Part
+### Add Dish
 
 method  `POST`
 
-end point: ```api/v1/user/provider```
+end point: ```/api/dish```
+
+json:
+```
+ {
+    
+	"name": "Pizza",
+	"price": 20,
+	"serving_size": 2,
+	"cuisine_type": "chinese",
+	"dietary_information": "2 calories",
+	"course_type": "dinner",
+	"description": "this is a dish",
+	"ingredients[]": "apple",
+	"ingredients[]": "mango",
+	serving_time:  2
+  }
+```
+Response:
+```
+{
+    "message": "Dish Added Successfully"
+}
+```
 
-method  `GET`
 
-end point: ``` api/v1/user/provider/{provider}```
-
-
-method  `DELETE`
-
-end point: ``` api/v1/user/provider/{provider}```
-
-### Driver Part
-
-method  `POST`
-
-end point: ```api/v1/user/driver```
-
-method  `GET`
-
-end point: ``` api/v1/user/driver/{driver}```
-
-
-method  `DELETE`
-
-end point: ``` api/v1/user/driver/{driver}```
-
-### Customer Address Part
-
-method  `POST`
-
-end point: ```api/v1/user/customer/address```
-
-
-method  `PUT`
-
-end point: ```api/v1/user/customer/address/{address}```
-
-
-method  `DELETE`
-
-end point: ```api/v1/user/customer/address/{address}```
-
-
-### Provider Address Part
-
-method  `PUT`
-
-end point: ```api/v1/user/provider/address/{address} ```
-
-
-method  `DELETE`
-
-end point: ```api/v1/user/provider/address/{address}```
-
-
-### Driver Address Part
-
-method  `PUT`
-
-end point: ```api/v1/user/driver/address/{address}```
-
-
-method  `DELETE`
-
-end point: ```api/v1/user/driver/address/{address}```
-
-
-### User Detail
-
-Method `GET`
-
-end point: ```api/v1/user```
-
-
-### Category Part
-
-
-Method `GET`
-
-end point  ```api/v1/admin/category ```
-
-
-
-Method `POST`
-
-end point  ```api/v1/admin/category ```
-
-
-
-Method `GET`
-
-end point  ```api/v1/admin/category/{category} ```
-
-
-
-Method `DELETE`
-
-end point  ```api/v1/admin/category/{category}```
-
-
-### Service Part
-
-
-Method `GET`
-
-end point  ``` api/v1/admin/service ```
-
-
-
-Method `POST`
-
-end point  ``` api/v1/admin/service```
-
-
-
-Method `GET`
-
-end point  ```api/v1/admin/service/{service}```
-
-
-
-Method `DELETE`
-
-end point  ```api/v1/admin/service/{service}```
-
-
-### Post Part
-
-
-Method `GET`
-
-end point  ```api/v1/user/post ```
-
-
-
-Method `POST`
-
-end point  ```api/v1/user/post```
-
-
-
-Method `GET`
-
-end point  ```api/v1/user/post/{post}```
-
-
-
-Method `DELETE`
-
-end point  ```api/v1/user/post/{post}```
-
-
-### Post Schedule Part
-
-
-Method `POST`
-
-end point  ```api/v1/user/post/schedule```
-
-
-
-Method `PUT`
-
-end point  ```api/v1/user/post/schedule/{schedule}```
-
-
-
-Method `DELETE`
-
-end point  ```api/v1/user/post/schedule/{schedule}```
-
-
-### Post Price Part
-
-
-Method `POST`
-
-end point  ```api/v1/user/post/price```
-
-
-
-Method `PUT`
-
-end point  ```api/v1/user/post/price/{price}```
-
-
-
-Method `DELETE`
-
-end point  ```api/v1/user/post/price/{price}```
-
-
-### Reset Password
-
-Method `POST`
-
-end point `api/v1/user/reset/password`
-
-### Post Detail Part
-
-
-Method `POST`
-
-end point  ```api/v1/user/post/detail```
-
-Method `PUT`
-
-end point  ```api/v1/user/post/detail/{detail}```
-
-Method `GET`
-
-end point ```api/v1/user/post/detail/{detail}```
-
-Method `DELETE`
-
-end point  ``` api/v1/user/post/detail/{detail}```
