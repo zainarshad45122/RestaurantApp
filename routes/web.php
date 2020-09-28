@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-
+Route::get('/profile', 'AdminController@welcome')->name('profile');
 
 Route::get('/home', 'AdminController@index')->name('home')->middleware('admin');
 Route::get('/', 'AdminController@index')->name('welcome')->middleware('admin');
@@ -50,3 +50,8 @@ Route::get('/restaurant/block/{id}', 'AdminController@statusBlocked')->middlewar
 Route::get('/restaurant/inprocessing/{id}', 'AdminController@statusInProcessing')->middleware('admin');
 
 
+Route::get('firebase-get-data', 'FirebaseController@getData');
+
+Route::get('firebase-update-data', 'FirebaseController@updateData');
+
+Route::get('firebase-set-data', 'FirebaseController@index');

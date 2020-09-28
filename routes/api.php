@@ -27,14 +27,24 @@ Route::post('/table', 'PassportController@createTable');
 //Dish Routes
 Route::middleware('auth:api')->group(function () {
     Route::post('/dish', 'DishesController@store');
+    Route::post('/dish/update', 'DishesController@update');
+    Route::post('/dish/update', 'DishesController@update');
 
 });
+
+Route::get('/dishes/{id}', 'DishesController@show');
+Route::get('/dish/{id}', 'DishesController@getdish');
+
 
 //Order Routes
 Route::middleware('auth:api')->group(function () {
     Route::post('/order/status', 'OrdersController@updateOrderStatus');
+      Route::get('/orders', 'OrdersController@index');
+    Route::get('/order/{id}', 'OrdersController@show');
+    Route::post('/order/create', 'OrdersController@store');
 
 });
+
 
 
 Route::get('brands','HomeController@getbrands');

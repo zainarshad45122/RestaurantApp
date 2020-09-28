@@ -106,4 +106,113 @@ Response:
 }
 ```
 
+### Update Dish
+
+method  `POST`
+
+end point: ```/api/dish```
+
+json:
+```
+ {
+    
+  "name": "Pizza",
+  "price": 20,
+  "serving_size": 2,
+  "cuisine_type": "chinese",
+  "dietary_information": "2 calories",
+  "course_type": "dinner",
+  "description": "this is a dish",
+  "ingredients[]": "apple",
+  "ingredients[]": "mango",
+  "serving_time":  2,
+  "dish_id" : 1,
+
+  }
+```
+Response:
+```
+{
+    "message": "Dish Updated Successfully"
+}
+```
+
+### Get All Dishes of Restaurant
+
+method  `GET`
+
+end point: ```/api/dish/{restaurant_id}```
+
+
+
+### Get Single Dish 
+
+method  `GET`
+
+end point: ```/api/dish/{dish_id}```
+
+
+
+### Place Order
+
+method  `POST`
+
+end point: ```/api/order/create```
+
+json:
+```
+ {
+    
+  'table_id' =>  1,
+  'restaurant_id' => 2,
+  'total_price' =>  50,
+  'order_status' => InProcessing,
+  'dish_id[]' => '1',
+  'dish_id[]' => '2',
+
+  }
+```
+Response:
+```
+{
+    "message": "Order Plaed Successfully"
+}
+```
+
+### Get All Orders of Restaurant
+
+method  `Get`
+
+end point: ```/api/orders/```
+
+
+### Update Order Status
+
+method  `POST`
+
+end point: ```/api/order/status```
+
+json:
+```
+ {
+    
+  'order_id' =>  1,
+  'order_status' => 'Completed',
+  }
+```
+Response:
+```
+{
+    "message": "Order Status Updated Successfully"
+}
+```
+
+
+
+
+
+
+
+
+
 

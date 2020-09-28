@@ -18,18 +18,26 @@ class FirebaseController extends Controller
     public function index() {
 
 
-       $factory = (new Factory)->withServiceAccount(__DIR__.'/FirebaseKey.json');
+        $factory = (new Factory)->withServiceAccount(__DIR__.'/FirebaseKey.json');
 
         $database = $factory->createDatabase();
 
-        $createPost    =   $database
+      /*  $createPost    =   $database
 
         ->getReference('blog')
         ->push([
             'title' =>  'Hello ',
             'body'  =>  'This is really a cool database that is managed in real time.'
 
-        ]);
+        ]);*/
+        $data = [
+           'id' => '3',
+           'total_price' => '50',
+           'table_number' => '7',
+           'status' => 'InProcessing'
+        ];
+        $createPost    =  $database->getReference('restaurant/3')->set($data);
+
             
         echo '<pre>';
         print_r($createPost->getvalue());
@@ -39,14 +47,20 @@ class FirebaseController extends Controller
 
     // --------------- [ Listing Data ] ------------------
     public function getData() {
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/FirebaseKey.json');
-        $firebase = (new Factory)
-        ->withServiceAccount($serviceAccount)
-        ->withDatabaseUri('https://restaurant-84ada.firebaseio.com/')
-        ->create();
+     
+        return view('orders_screen');
+    }
 
-        $database   =   $firebase->getDatabase();
-        $createPost    =   $database->getReference('blog/posts')->getvalue();      
-        return response()->json($createPost);
+      public function updateData() {
+     
+         $factory = (new Factory)->withServiceAccount(__DIR__.'/FirebaseKey.json');
+
+        $database = $factory->createDatabase();
+
+        $createPost    =   $database->getReference('restaurant/1')->update(array('status' => 'Completed'));
+
+        return true;
+            
+      
     }
 }

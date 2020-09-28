@@ -23,8 +23,8 @@ class Admin
             return $next($request);
         }
 
-        if (Auth::user()->role != 1) {
-            return redirect()->route('welcome');
+        if (Auth::user()->role == 2) {
+            return redirect()->route('profile');
         }
     }
 }

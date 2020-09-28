@@ -42,6 +42,7 @@ class DishesController extends Controller
     public function store(Request $request)
     {
         $user = $request->user();
+
       
         $this->validate($request, [
             'name' => 'required|min:3',
@@ -84,10 +85,11 @@ class DishesController extends Controller
      * @param  \App\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $user = $request->user();
-        $dish_find =DB::table('dishes')->where('id', '=', $user->id)->get();
+
+       
+        $dish_find =DB::table('dishes')->where('restaurant_id', '=', $id)->get();
         for($x=0; $x< count($dish_find); $x++)
         {
             $dish_id = $dish_find[$x]->id;
@@ -116,30 +118,17 @@ class DishesController extends Controller
 
      public function getdish(Request $request, $id)
     {
-        $user = Auth::user();
-        $chef = $user->chef;
-        $chef_id = $chef->id;
-        $dish= DB::table('dishes')->where('id',$id)->get();
-        $dish_chef_id = $dish[0]->chef_id;
-        if($chef_id == $dish_chef_id)
-        {
-            $ingredients= DB::table('ingredients')->select('ingredients')->where('dish_id',$id)->get();
-            $servingtime= DB::table('serving_timings')->select('servingtime')->where('dish_id',$id)->get();
-            $dishimage= DB::table('dish_images')->select(array('id','dishimages'))->where('dish_id',$id)->get();
-            $reviews= DB::table('dish_reviews')->select(array('rating','comments'))->where('dish_id',$id)->get();
-            return response()->json([ 
-                                      'dish' => $dish, 
-                                      'ingredients' => $ingredients,
-                                      'dish_images' => $dishimage,
-                                      'reviews' => $reviews,
-                                    ], 200);
-        }
-        else 
-        {
-            return response()->json([
-                'message' => 'Record could not Found'
-            ], 500);
-        }
+       
+        $dish_find =DB::table('dishes')->where('id', '=', $id)->get();
+        $ingredients= DB::table('ingredients')->select('ingredients')->where('dish_id',$id)->get();
+        $dish_find[0]->ingredients= $ingredients;
+        return response()->json([ 
+                                'dish' => $dish_find, 
+                                    
+
+                              ], 200);
+        
+       
         
     }
 
@@ -176,14 +165,8 @@ class DishesController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {      
-        $user = $request->user();
-        
-        $dish_id = $request->id;
-        $dish = Dish::findOrFail($dish_id);
-        $dish_restaurant_id = $dish->restaurant_id;
-        if($user->id == $dish_restaurant_id)
-        {
-        $this->validate($request, [
+
+         $this->validate($request, [
             'name' => 'required|min:3',
             'price' =>'required|integer',
             'serving_size' => 'required',
@@ -192,8 +175,18 @@ class DishesController extends Controller
             'course_type' => 'required',
             'description' => 'required|min:8',
             'serving_time' => 'required|array',
+            'dish_id' => 'required'
      
         ]);
+
+        $user = $request->user();
+        
+        $dish_id = $request->dish_id;
+        $dish = Dish::findOrFail($dish_id);
+        $dish_restaurant_id = $dish->restaurant_id;
+        if($user->id == $dish_restaurant_id)
+        {
+       
      
         $dishes = $dish->update([
             'name' => $request->name,
