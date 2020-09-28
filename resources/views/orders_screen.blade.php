@@ -20,7 +20,7 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <style type="text/css">
-      .text-center {
+      .myRow {
         font-size: 20px;
       }
     </style>
@@ -44,10 +44,10 @@
                                               
                                            <thead>
                                             <tr>
-                                                <th class="text-center">#</th>
-                                                <th class="text-center">Total Price</th>
-                                                <th class="text-center">Table Number</th>
-                                                <th class="text-center">Status</th>
+                                                <th >#</th>
+                                                <th >Total Price</th>
+                                                <th >Table Number</th>
+                                                <th >Status</th>
                                                
                                             </tr>
                                             </thead>                                         
@@ -97,7 +97,7 @@
   var database = firebase.database();
 
   firebase.database().ref('restaurant').orderByChild("restaurant_id").equalTo(1).on('value',   function(snapshot) {
-     $("#myTable tr").remove(); 
+     $("#myTable .myRow").remove(); 
     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
       var childData = childSnapshot.val();
@@ -105,13 +105,13 @@
       var table = document.getElementById("myTable");
       var row = table.insertRow(-1);
       var cell1 = row.insertCell(0);
-      cell1.className= "text-center";
+      cell1.className= "myRow";
       var cell2 = row.insertCell(1);
-      cell2.className= "text-center";
+      cell2.className= "myRow";
       var cell3 = row.insertCell(2);
-      cell3.className= "text-center";
+      cell3.className= "myRow";
       var cell4 = row.insertCell(3);
-      cell4.className="text-center";
+      cell4.className="myRow";
       cell1.innerHTML = childData.id;
       cell2.innerHTML = childData.total_price;
       cell3.innerHTML = childData.table_number;

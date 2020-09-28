@@ -91,6 +91,7 @@ class OrdersController extends Controller
            'total_price' => $request->total_price,
            'table_number' => '7',
            'status' => $request->order_status,
+           'restaurant_id' => $request->restaurant_id
         ];
         $createPost    =  $database->getReference('restaurant/'.$order->id)->set($data);
 
