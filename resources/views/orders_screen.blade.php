@@ -23,11 +23,15 @@
       .myRow {
         font-size: 20px;
       }
+      #userId {
+       display:none;
+      }
     </style>
 </head>
 <body>
 	<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-		
+		    <input id="userId" type="text" value="{{ $userId }}">
+       
 		<div class="app-main__outer">
 	         <div class="app-main__inner">
 			   	<div class="row">
@@ -35,8 +39,8 @@
                              
                             <div class="col-lg-12">
                                 <div class="main-card mb-3 card" style="padding: 25px;">
-                                  <div class="card-header">Restaurant Orders
-                                       
+                                  <div class="card-header">{{ $branch_name }} Orders
+                                   
                                     </div>
                                    
                                     <div class="table-responsive">
@@ -95,10 +99,11 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
   var database = firebase.database();
-
-  firebase.database().ref('restaurant').orderByChild("restaurant_id").equalTo(1).on('value',   function(snapshot) {
+  var inputVal = document.getElementById("userId").value;
+  var restaurant_id = parseInt(inputVal, 10);
+  firebase.database().ref('restaurant').orderByChild("restaurant_id").equalTo(restaurant_id).on('value',   function(snapshot) {
      $("#myTable .myRow").remove(); 
-    snapshot.forEach(function(childSnapshot) {
+     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
       var childData = childSnapshot.val();
       console.log(childData);

@@ -10,6 +10,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
 use Kreait\Firebase\Database;
+use Auth;
 
 
 class FirebaseController extends Controller
@@ -47,8 +48,11 @@ class FirebaseController extends Controller
 
     // --------------- [ Listing Data ] ------------------
     public function getData() {
+
+        $userId = Auth::user()->id;
+        $branch_name = Auth::user()->branch_name;
      
-        return view('orders_screen');
+        return view('orders_screen', compact('userId', 'branch_name'));
     }
 
       public function updateData() {

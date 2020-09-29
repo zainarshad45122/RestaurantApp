@@ -24,7 +24,7 @@ class Admin
         }
 
         if (Auth::user()->role == 2) {
-            return redirect()->route('profile');
+            return redirect()->route('orders');
         }
     }
 }

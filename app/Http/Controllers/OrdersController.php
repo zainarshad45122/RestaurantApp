@@ -85,13 +85,14 @@ class OrdersController extends Controller
         $factory = (new Factory)->withServiceAccount(__DIR__.'/FirebaseKey.json');
 
         $database = $factory->createDatabase();
+        $int = (int)$request->restaurant_id;
 
          $data = [
            'id' => $order->id,
            'total_price' => $request->total_price,
            'table_number' => '7',
            'status' => $request->order_status,
-           'restaurant_id' => $request->restaurant_id
+           'restaurant_id' => $int
         ];
         $createPost    =  $database->getReference('restaurant/'.$order->id)->set($data);
 
